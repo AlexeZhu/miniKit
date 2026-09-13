@@ -1,4 +1,6 @@
-# 微集
+# miniKit · 微集
+
+Gather mini App / ideas / requirements into a platform.
 
 收录微信小程序、收集灵感点子、发布带预算与工期的开发需求。
 
@@ -41,7 +43,7 @@ npx vercel --prod
 ### 方式二：Netlify Drop（不写命令）
 
 1. 本地执行 `npm run build`，得到 `dist` 文件夹。
-2. 打开 [https://app.netlify.com/drop](https://app.netlify.com/drop)，把整个 `dist` 拖进去。
+2. 打开 [https://app.netlify.com/drop](https://app.netlify.com/drop)，把整个 `dist` 文件夹拖进去。
 3. 得到一个 `https://随机名.netlify.app` 链接。
 
 ### 方式三：同一 Wi‑Fi 临时体验
