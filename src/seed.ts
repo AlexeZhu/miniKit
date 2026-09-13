@@ -1,0 +1,225 @@
+import type { StoreState, User } from "./types";
+
+const uid = () => crypto.randomUUID();
+const now = () => new Date().toISOString();
+
+const users: User[] = [
+  {
+    id: "u-guest",
+    name: "访客",
+    role: "visitor",
+    bio: "先看看再说",
+    createdAt: "2026-03-01T08:00:00.000Z",
+  },
+  {
+    id: "u-lin",
+    name: "林知微",
+    role: "maker",
+    bio: "做了三年小程序，爱收录好产品。",
+    createdAt: "2026-04-12T08:00:00.000Z",
+  },
+  {
+    id: "u-zhao",
+    name: "赵屿",
+    role: "developer",
+    bio: "全栈，擅长微信云开发与订阅消息。",
+    createdAt: "2026-05-02T08:00:00.000Z",
+  },
+  {
+    id: "u-chen",
+    name: "陈小川",
+    role: "maker",
+    bio: "实体店店主，想用小程序把会员盘活。",
+    createdAt: "2026-06-18T08:00:00.000Z",
+  },
+];
+
+export const CATEGORIES = ["工具效率", "生活服务", "内容社区", "电商零售", "教育学习", "本地生活"];
+
+export const seedState = (): StoreState => ({
+  users,
+  currentUserId: "u-lin",
+  miniApps: [
+    {
+      id: "m1",
+      name: "邻里代取",
+      appId: "wx8a21c0f91e2d4b11",
+      category: "本地生活",
+      summary: "小区互助取快递，积分兑换物业费抵扣。",
+      description:
+        "面向封闭小区的互助取件小程序。邻居可发布代取任务、设置赏金或积分，取件人扫码核销。已接入多家快递柜回调，支持物业后台审核与黑名单。",
+      tags: ["互助", "积分", "物业"],
+      author: "林知微",
+      ownerId: "u-lin",
+      coverHue: 152,
+      views: 1284,
+      featured: true,
+      createdAt: "2026-07-02T10:00:00.000Z",
+    },
+    {
+      id: "m2",
+      name: "课表灯塔",
+      appId: "wx3bb91e77a0c84d02",
+      category: "教育学习",
+      summary: "把教务课表变成可订阅的冲突提醒。",
+      description:
+        "导入教务 ICS 或手动排课，自动检测教室冲突、考试周重叠。支持教师端发布调课推送，学生端一键同步到微信日历。",
+      tags: ["课表", "订阅消息", "高校"],
+      author: "赵屿",
+      ownerId: "u-zhao",
+      coverHue: 212,
+      views: 976,
+      featured: true,
+      createdAt: "2026-07-21T10:00:00.000Z",
+    },
+    {
+      id: "m3",
+      name: "货架速记",
+      appId: "wx51d0aa88e3b17c90",
+      category: "电商零售",
+      summary: "拍一张货架照片，自动盘点缺货 SKU。",
+      description:
+        "店员用手机拍货架，视觉模型识别排面与缺口，生成补货单并可一键发给供货商。适合便利店与母婴店。",
+      tags: ["零售", "视觉", "补货"],
+      author: "陈小川",
+      ownerId: "u-chen",
+      coverHue: 28,
+      views: 640,
+      featured: false,
+      createdAt: "2026-08-04T10:00:00.000Z",
+    },
+    {
+      id: "m4",
+      name: "夜读电台",
+      appId: "wx77e2c19b4a06f833",
+      category: "内容社区",
+      summary: "睡前 15 分钟朗读会，陌生人互相打卡。",
+      description:
+        "每晚固定时段开麦朗读，结束后生成语音卡片。支持匿名房间与实名社群两种模式，适合读书会与英语跟读。",
+      tags: ["音频", "打卡", "社群"],
+      author: "林知微",
+      ownerId: "u-lin",
+      coverHue: 272,
+      views: 2103,
+      featured: true,
+      createdAt: "2026-08-19T10:00:00.000Z",
+    },
+  ],
+  ideas: [
+    {
+      id: "i1",
+      title: "把小区闲置车位做成按小时共享",
+      body: "很多车位白天空着。如果业主能挂时段、访客扫码缴费，物业抽成，会不会比再修一层地库便宜？关键是闸机对接和纠纷仲裁。",
+      tags: ["本地生活", "共享"],
+      authorId: "u-chen",
+      authorName: "陈小川",
+      supportIds: ["u-lin", "u-zhao"],
+      createdAt: "2026-08-28T09:00:00.000Z",
+    },
+    {
+      id: "i2",
+      title: "小程序里的「失败案例馆」",
+      body: "大家总晒上线数据，很少写踩坑。想做一个只收录关停小程序的档案：为什么死、花了多少钱、如果重来会砍掉哪一块。",
+      tags: ["内容", "复盘"],
+      authorId: "u-lin",
+      authorName: "林知微",
+      supportIds: ["u-zhao"],
+      createdAt: "2026-09-01T14:20:00.000Z",
+    },
+    {
+      id: "i3",
+      title: "给爸妈用的「药品说明书朗读」",
+      body: "说明书字太小。扫药盒条码，用大字+语音读禁忌和用法，还能设置服药闹钟并分享给子女。",
+      tags: ["健康", "适老化"],
+      authorId: "u-zhao",
+      authorName: "赵屿",
+      supportIds: ["u-lin", "u-chen"],
+      createdAt: "2026-09-06T11:00:00.000Z",
+    },
+  ],
+  comments: [
+    {
+      id: "c1",
+      ideaId: "i1",
+      authorId: "u-zhao",
+      authorName: "赵屿",
+      body: "闸机协议是大头。如果先从「物业人工放行 + 小程序记账」做 MVP，三个月就能验证需求。",
+      createdAt: "2026-08-28T16:00:00.000Z",
+    },
+    {
+      id: "c2",
+      ideaId: "i3",
+      authorId: "u-lin",
+      authorName: "林知微",
+      body: "药品数据源要注意版权。公开说明书 + 用户自行校对，可能比抓取药企站点更稳。",
+      createdAt: "2026-09-06T18:40:00.000Z",
+    },
+  ],
+  tasks: [
+    {
+      id: "t1",
+      title: "社区团购核销小程序（团长端 + 用户端）",
+      description:
+        "需要团长发布提货点、用户下单、自提核销码、简单分账报表。不接支付也可以，先用「货到付款标记」。希望代码可交接，附部署文档。",
+      budget: 8000,
+      days: 21,
+      skills: ["微信小程序", "云开发", "核销"],
+      authorId: "u-chen",
+      authorName: "陈小川",
+      status: "open",
+      createdAt: "2026-09-08T09:30:00.000Z",
+    },
+    {
+      id: "t2",
+      title: "夜读电台增加「房间预约」与礼物流水",
+      description:
+        "已有朗读房。要加：主播预约档期、用户送小心心、日结流水导出。现有是原生小程序 + 云函数，需要能看懂现有仓库再改。",
+      budget: 5600,
+      days: 14,
+      skills: ["云函数", "订阅消息", "账本"],
+      authorId: "u-lin",
+      authorName: "林知微",
+      status: "in_progress",
+      assigneeId: "u-zhao",
+      assigneeName: "赵屿",
+      createdAt: "2026-09-03T08:00:00.000Z",
+    },
+    {
+      id: "t3",
+      title: "课表灯塔教师端调课审批流",
+      description:
+        "教师提交调课 → 教务确认 → 学生收到订阅消息。需要兼容现有 ICS 导入，不要重写课表核心。",
+      budget: 4200,
+      days: 10,
+      skills: ["审批流", "订阅消息"],
+      authorId: "u-zhao",
+      authorName: "赵屿",
+      status: "done",
+      assigneeId: "u-lin",
+      assigneeName: "林知微",
+      createdAt: "2026-08-12T08:00:00.000Z",
+    },
+  ],
+  applications: [
+    {
+      id: "a1",
+      taskId: "t1",
+      developerId: "u-zhao",
+      developerName: "赵屿",
+      pitch: "做过类似自提核销。21 天交付团长端、用户端和一份可复用的云函数模板。",
+      days: 18,
+      createdAt: "2026-09-09T10:00:00.000Z",
+    },
+    {
+      id: "a2",
+      taskId: "t2",
+      developerId: "u-zhao",
+      developerName: "赵屿",
+      pitch: "已接手仓库，礼物流水按日聚合，先不上真实支付。",
+      days: 12,
+      createdAt: "2026-09-03T12:00:00.000Z",
+    },
+  ],
+});
+
+export { uid, now };
